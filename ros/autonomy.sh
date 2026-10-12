@@ -65,8 +65,8 @@ fi
 # stop the recorders cleanly (bag index, .rrd) when the mission ends or the container is stopped
 finish() {
   log "stopping recorders"
-  [ -n "${BAG_PID:-}" ] && kill -INT $BAG_PID 2>/dev/null
-  pkill -INT -f rtab_rerun_bridge.py 2>/dev/null
+  [ -n "${BAG_PID:-}" ] && kill -TERM $BAG_PID 2>/dev/null   # background jobs of a script ignore SIGINT
+  pkill -TERM -f rtab_rerun_bridge.py 2>/dev/null
   for _ in $(seq 120); do      # the recorder flushes its queue and writes the index; this can take a while
     { [ -n "${BAG_PID:-}" ] && kill -0 $BAG_PID 2>/dev/null; } || pgrep -f rtab_rerun_bridge.py >/dev/null || break
     sleep 1
