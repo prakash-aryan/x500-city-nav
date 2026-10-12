@@ -1,0 +1,6 @@
+# drone model, built locally by scripts/build_x500_usd.py
+assets/x500/
+# flight recordings
+runs/
+__pycache__/
+.venv/

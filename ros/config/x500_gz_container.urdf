@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<robot name="x500">
+  <material name="prop_dark"><color rgba="0.05 0.05 0.05 1"/></material>
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.025" rpy="0 0 3.141592654"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/NXP-HGD-CF.dae"/></geometry>
+    </visual>
+    <visual>
+      <origin xyz="0.174 0.174 0.032" rpy="0 0 -0.45"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/5010Base.dae"/></geometry>
+    </visual>
+    <visual>
+      <origin xyz="-0.174 0.174 0.032" rpy="0 0 -0.45"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/5010Base.dae"/></geometry>
+    </visual>
+    <visual>
+      <origin xyz="0.174 -0.174 0.032" rpy="0 0 -0.45"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/5010Base.dae"/></geometry>
+    </visual>
+    <visual>
+      <origin xyz="-0.174 -0.174 0.032" rpy="0 0 -0.45"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/5010Base.dae"/></geometry>
+    </visual>
+  </link>
+
+  <link name="rotor_0">
+    <visual>
+      <origin xyz="-0.022 -0.14638461 -0.016" rpy="0 0 0"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/1345_prop_ccw.stl"/></geometry>
+      <material name="prop_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.032" rpy="0 0 0"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/5010Bell.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="j_rotor_0" type="continuous"><parent link="base_link"/><child link="rotor_0"/><origin xyz="0.174 -0.174 0.06" rpy="0 0 0"/><axis xyz="0 0 1"/></joint>
+
+  <link name="rotor_1">
+    <visual>
+      <origin xyz="-0.022 -0.14638461 -0.016" rpy="0 0 0"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/1345_prop_ccw.stl"/></geometry>
+      <material name="prop_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.032" rpy="0 0 0"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/5010Bell.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="j_rotor_1" type="continuous"><parent link="base_link"/><child link="rotor_1"/><origin xyz="-0.174 0.174 0.06" rpy="0 0 0"/><axis xyz="0 0 1"/></joint>
+
+  <link name="rotor_2">
+    <visual>
+      <origin xyz="-0.022 -0.14638461 -0.016" rpy="0 0 0"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/1345_prop_cw.stl"/></geometry>
+      <material name="prop_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.032" rpy="0 0 0"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/5010Bell.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="j_rotor_2" type="continuous"><parent link="base_link"/><child link="rotor_2"/><origin xyz="0.174 0.174 0.06" rpy="0 0 0"/><axis xyz="0 0 1"/></joint>
+
+  <link name="rotor_3">
+    <visual>
+      <origin xyz="-0.022 -0.14638461 -0.016" rpy="0 0 0"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/1345_prop_cw.stl"/></geometry>
+      <material name="prop_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.032" rpy="0 0 0"/>
+      <geometry><mesh filename="file:///opt/PX4-Autopilot/Tools/simulation/gz/models/x500_base/meshes/5010Bell.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="j_rotor_3" type="continuous"><parent link="base_link"/><child link="rotor_3"/><origin xyz="-0.174 -0.174 0.06" rpy="0 0 0"/><axis xyz="0 0 1"/></joint>
+</robot>

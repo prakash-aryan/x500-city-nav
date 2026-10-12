@@ -1,0 +1,49 @@
+diff --git a/src/planner/plan_env/include/plan_env/grid_map.h b/src/planner/plan_env/include/plan_env/grid_map.h
+index cd238a4..883277c 100755
+--- a/src/planner/plan_env/include/plan_env/grid_map.h
++++ b/src/planner/plan_env/include/plan_env/grid_map.h
+@@ -3,7 +3,7 @@
+ 
+ #include <Eigen/Eigen>
+ #include <Eigen/StdVector>
+-#include <cv_bridge/cv_bridge.h>
++#include <cv_bridge/cv_bridge.hpp>
+ #include <geometry_msgs/msg/pose_stamped.hpp>
+ #include <iostream>
+ #include <random>
+diff --git a/src/planner/plan_manage/src/ego_replan_fsm.cpp b/src/planner/plan_manage/src/ego_replan_fsm.cpp
+index 78d5eee..02fce54 100755
+--- a/src/planner/plan_manage/src/ego_replan_fsm.cpp
++++ b/src/planner/plan_manage/src/ego_replan_fsm.cpp
+@@ -204,18 +204,14 @@ namespace ego_planner
+       have_target_ = true;
+       have_new_target_ = true;
+ 
+-      /*** FSM状态转换 ***/
++      /*** FSM state transition ***/
++      // node_ is owned by the main executor; calling spin_some(node_) here aborts
++      // ("already added to an executor"). The FSM exec timer drives replanning, so just
++      // transition directly instead of busy-waiting for EXEC_TRAJ.
+       if (exec_state_ == WAIT_TARGET)
+         changeFSMExecState(GEN_NEW_TRAJ, "TRIG");
+       else
+-      {
+-        while (exec_state_ != EXEC_TRAJ)
+-        {
+-          rclcpp::spin_some(node_);
+-          std::this_thread::sleep_for(std::chrono::milliseconds(1));
+-        }
+         changeFSMExecState(REPLAN_TRAJ, "TRIG");
+-      }
+ 
+       visualization_->displayGlobalPathList(gloabl_traj, 0.1, 0);
+     }
+@@ -241,7 +237,7 @@ namespace ego_planner
+ 
+     init_pt_ = odom_pos_;
+ 
+-    Eigen::Vector3d end_wp(msg->pose.position.x, msg->pose.position.y, 1.0);
++    Eigen::Vector3d end_wp(msg->pose.position.x, msg->pose.position.y, msg->pose.position.z);
+ 
+     planNextWaypoint(end_wp);
+   }
